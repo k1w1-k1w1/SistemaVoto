@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Código de Voto</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-box">
+            <div class="dashboard-header">
+                <h1>🔑 Generar Código de Voto</h1>
+                <button onclick="window.location.href='/pages/Jefe/dashboard.html'" class="btn-secondary">
+                    ← Volver
+                </button>
+            </div>
+
+            <div id="mensaje" class="mensaje oculto"></div>
+
+            <!-- Paso 1: Buscar Votante -->
+            <div class="card" id="paso1">
+                <h3>Paso 1: Buscar Votante</h3>
+                <form id="buscarForm">
+                    <div class="form-group">
+                        <label for="cedula">Cédula del Votante:</label>
+                        <input type="text" id="cedula" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eleccionId">Elección:</label>
+                        <select id="eleccionId" required>
+                            <option value="">Seleccione una elección...</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Buscar</button>
+                </form>
+            </div>
+
+            <!-- Paso 2: Confirmar Generación -->
+            <div class="card oculto" id="paso2">
+                <h3>Paso 2: Confirmar Datos</h3>
+                <div id="datosVotante"></div>
+
+                <button id="btnGenerar" class="btn-primary">
+                    Generar y Enviar Código
+                </button>
+                <button onclick="location.reload()" class="btn-secondary">
+                    Cancelar
+                </button>
+            </div>
+
+            <!-- Paso 3: Código Generado -->
+            <div class="card oculto" id="paso3">
+                <h3>✅ Código Generado Exitosamente</h3>
+                <div id="resultadoCodigo"></div>
+
+                <div class="codigo-display" id="codigoDisplay"></div>
+
+                <button onclick="location.reload()" class="btn-primary">
+                    Generar Otro Código
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/jefe-generar.js"></script>
+</body>
+</html>

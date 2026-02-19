@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Incidencias</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-box">
+            <div class="dashboard-header">
+                <h1>⚠️ Incidencias</h1>
+                <button onclick="window.location.href='/pages/Admin/dashboard.html'" class="btn-secondary">← Volver</button>
+            </div>
+
+            <div id="mensaje" class="mensaje oculto"></div>
+
+            <div class="card">
+                <h3>Filtros</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="fEstado">
+                            <option value="">Todos</option>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Resuelta">Resuelta</option>
+                            <option value="Rechazada">Rechazada</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        <input id="fTipo" type="text" placeholder="Ej: ProblemaTecnico" />
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn-primary" onclick="cargarIncidencias()">🔎 Buscar</button>
+                    <button class="btn-secondary" onclick="limpiarFiltros()">🧹 Limpiar</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Listado</h3>
+                <div class="table-wrap">
+                    <table class="tabla" id="tablaIncidencias">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Jefe</th>
+                                <th>Votante</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="7">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/admin-incidencias.js"></script>
+</body>
+</html>

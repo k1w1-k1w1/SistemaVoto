@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificado de votación</title>
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+
+    <style>
+        .certWrap {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .certWrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cert {
+            border: 2px dashed #ffcdd2;
+            border-radius: 16px;
+            padding: 18px;
+            background: #fff;
+            position: relative;
+        }
+
+        .certBadge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #c62828;
+            color: #fff;
+            font-weight: 900;
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 12px;
+            letter-spacing: 0.6px;
+        }
+
+        .certTitle {
+            margin: 0;
+            color: #c62828;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .certSub {
+            margin: 6px 0 0 0;
+            color: #666;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .hr {
+            height: 1px;
+            background: #eee;
+            margin: 14px 0;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 650px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .field {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 12px;
+            background: #fafafa;
+        }
+
+            .field b {
+                display: block;
+                color: #111;
+                margin-bottom: 6px;
+                font-size: 12px;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+            }
+
+            .field span {
+                color: #333;
+                font-weight: 800;
+                font-size: 14px;
+            }
+
+        .stamp {
+            margin-top: 14px;
+            border-radius: 14px;
+            padding: 12px;
+            background: #fff5f5;
+            border: 1px solid #ffcdd2;
+            color: #a11616;
+            font-weight: 800;
+            font-size: 13px;
+            line-height: 1.35;
+        }
+
+        /* impresión */
+        @media print {
+            .topbar, .panel-head, .footer-actions, #btnVolver, #btnLogout, #actionsSide {
+                display: none !important;
+            }
+
+            body {
+                background: #fff !important;
+            }
+
+            .panel {
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            .page {
+                padding: 0 !important;
+            }
+
+            .cert {
+                border: 2px solid #c62828 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="shell">
+
+            <div class="topbar">
+                <div class="brand">
+                    <h1>📄 Certificado de votación</h1>
+                    <p id="subInfo">Cargando...</p>
+                </div>
+
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button id="btnVolver" class="btnx soft">← Volver</button>
+                    <button id="btnLogout" class="btnx danger">Cerrar sesión</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <div class="user-chip">
+                        <span class="user-dot"></span>
+                        <span id="estadoSesion">Validando...</span>
+                    </div>
+
+                    <div style="color:#c62828; font-weight:800;">
+                        Documento oficial
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div id="mensaje" class="mensaje oculto"></div>
+
+                    <div class="certWrap">
+                        <!-- Certificado -->
+                        <div class="cert" id="certArea">
+                            <div class="certBadge">CERTIFICADO</div>
+
+                            <h2 class="certTitle">Certificado de Votación</h2>
+                            <p class="certSub">Sistema de Votación Electrónica</p>
+
+                            <div class="hr"></div>
+
+                            <div class="row">
+                                <div class="field">
+                                    <b>Votante</b>
+                                    <span id="fNombre">—</span>
+                                </div>
+
+                                <div class="field">
+                                    <b>Cédula</b>
+                                    <span id="fCedula">—</span>
+                                </div>
+
+                                <div class="field">
+                                    <b>Elección</b>
+                                    <span id="fEleccion">—</span>
+                                </div>
+
+                                <div class="field">
+                                    <b>Tipo de elección</b>
+                                    <span id="fTipoEleccion">—</span>
+                                </div>
+
+                                <div class="field">
+                                    <b>Número de confirmación</b>
+                                    <span id="fConfirmacion">—</span>
+                                </div>
+
+                                <div class="field">
+                                    <b>Fecha de emisión</b>
+                                    <span id="fFecha">—</span>
+                                </div>
+                            </div>
+
+                            <div class="stamp">
+                                ✅ Este certificado confirma que el ciudadano registró su participación en el proceso electoral
+                                dentro del Sistema de Votación Electrónica.
+                                <br><br>
+                                Recomendación: imprímelo o guárdalo como PDF.
+                            </div>
+                        </div>
+
+                        <!-- Acciones -->
+                        <div class="card2" id="actionsSide">
+                            <h3>Acciones</h3>
+
+                            <div class="kv">
+                                <div><b>Estado:</b> <span id="estadoVotante">—</span></div>
+                                <div><b>Elección ID:</b> <span id="eleccionIdTxt">—</span></div>
+                                <div><b>Votante ID:</b> <span id="votanteIdTxt">—</span></div>
+                            </div>
+
+                            <div class="actions" style="margin-top:14px;">
+                                <button id="btnImprimir" class="btnx primary">🖨 Imprimir / Guardar PDF</button>
+                                <button id="btnIrDashboard" class="btnx soft">🏠 Ir al dashboard</button>
+                            </div>
+
+                            <div class="small-note" style="margin-top:10px;">
+                                Si no aparece el certificado, revisa que hayas emitido el voto en una elección válida.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-actions">
+                    <button id="btnLimpiar" class="btnx soft">🧹 Limpiar datos locales</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/votante-certificado.js"></script>
+</body>
+</html>

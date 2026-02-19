@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Asignaciones</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/admin-theme.css">
+</head>
+<body>
+    <div class="admin-container">
+
+        <div class="admin-header">
+            <div>
+                <h1>📍 Asignaciones</h1>
+                <p class="breadcrumb">Admin / Asignaciones</p>
+            </div>
+            <button onclick="window.location.href='/pages/Admin/dashboard.html'" class="btn-admin-secondary">← Volver</button>
+        </div>
+
+        <div id="mensaje" class="mensaje oculto"></div>
+
+        <div class="admin-card">
+            <h3>🏫 Selecciona una ubicación</h3>
+            <div class="admin-form-group">
+                <label>Ubicación existente</label>
+                <select id="ubicacionId" class="admin-form-control"></select>
+            </div>
+            <div class="small-note" style="color:#666;">
+                Primero eliges la ubicación, luego asignas por cédula.
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h3>👥 Asignar Votante por Cédula</h3>
+            <form id="formAsignarVotante">
+                <div class="admin-form-group">
+                    <label>Cédula del votante</label>
+                    <input id="cedulaVotante" class="admin-form-control" maxlength="10" placeholder="Ej: 1004502345" required />
+                </div>
+
+                <div class="admin-actions-grid">
+                    <button class="btn-admin-primary" type="submit">✅ Asignar</button>
+                    <button class="btn-admin-outline" type="button" onclick="quitarVotante()">🧹 Quitar asignación</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="admin-card">
+            <h3>👨‍💼 Asignar Jefe por Cédula</h3>
+            <form id="formAsignarJefe">
+                <div class="admin-form-group">
+                    <label>Cédula del jefe</label>
+                    <input id="cedulaJefe" class="admin-form-control" maxlength="10" placeholder="Ej: 1004502345" required />
+                </div>
+
+                <div class="admin-actions-grid">
+                    <button class="btn-admin-primary" type="submit">✅ Asignar</button>
+                    <button class="btn-admin-outline" type="button" onclick="quitarJefe()">🧹 Quitar asignación</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/admin-asignaciones-cedula.js"></script>
+</body>
+</html>

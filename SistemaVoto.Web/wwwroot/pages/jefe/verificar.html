@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verificar Votante</title>
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/admin-theme.css" />
+</head>
+
+<body>
+    <div class="page">
+        <div class="shell">
+
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="brand">
+                    <h1>✓ Verificar Votante</h1>
+                    <p id="userInfo">Cargando sesión...</p>
+                </div>
+
+                <div style="display:flex; gap:10px;">
+                    <button id="btnVolver" class="btnx soft">← Volver</button>
+                    <button id="btnLogout" class="btnx danger">Cerrar sesión</button>
+                </div>
+            </div>
+
+            <!-- PANEL -->
+            <div class="panel">
+
+                <div class="panel-head">
+                    <div class="user-chip">
+                        <span class="user-dot"></span>
+                        <span id="estadoSesion">Validando...</span>
+                    </div>
+
+                    <div style="color:#c62828; font-weight:800;">
+                        Jefe de Junta
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div id="mensaje" class="mensaje oculto"></div>
+
+                    <div class="grid">
+
+                        <!-- FORM -->
+                        <div class="card2">
+                            <h3>🔎 Buscar votante</h3>
+
+                            <form id="verificarForm">
+                                <div class="admin-form-group">
+                                    <label for="cedula">Cédula del votante</label>
+                                    <input type="text" id="cedula" class="admin-form-control" maxlength="10"
+                                           placeholder="Ej: 1002003004" required />
+                                    <div class="small-note">Solo números, 10 dígitos.</div>
+                                </div>
+
+                                <div class="admin-form-group">
+                                    <label for="eleccionId">Elección activa</label>
+                                    <select id="eleccionId" class="admin-form-control" required>
+                                        <option value="">Cargando elecciones...</option>
+                                    </select>
+                                </div>
+
+                                <div class="actions" style="display:flex; gap:10px; flex-wrap:wrap;">
+                                    <button type="submit" class="btnx primary" id="btnVerificar">
+                                        ✓ Verificar
+                                    </button>
+                                    <button type="button" class="btnx soft" id="btnLimpiar">
+                                        🧹 Limpiar
+                                    </button>
+                                </div>
+
+                                <div class="small-note" id="ayudaRecinto">
+                                    Tip: si te sale “sin recinto”, pide al admin que te asigne una ubicación.
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- RESULTADO -->
+                        <div class="card2">
+                            <h3>📌 Resultado</h3>
+
+                            <div id="resultado" class="kv">
+                                Ingresa la cédula y selecciona una elección para verificar.
+                            </div>
+
+                            <div id="accionesVotante" class="actions" style="margin-top:14px; display:none; gap:10px; flex-wrap:wrap;">
+                                <button id="btnGenerarCodigo" class="btnx primary">
+                                    🔑 Generar código de voto
+                                </button>
+                            </div>
+
+                            <div class="small-note" id="notaResultado" style="margin-top:10px;">
+                                Aquí verás el estado del votante y si ya tiene código generado.
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/jefe-verificar.js"></script>
+</body>
+</html>

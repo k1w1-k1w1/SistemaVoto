@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar cuenta</title>
+    <link rel="stylesheet" href="/css/login-modern.css" />
+</head>
+<body>
+
+    <div class="bg-decor"></div>
+
+    <div class="container">
+        <div class="login-box">
+
+            <div class="brand">
+                <div class="brand-badge"><span>✅</span></div>
+                <h1>Sistema de Votación Electrónica</h1>
+            </div>
+
+            <h2>Confirmación de cuenta</h2>
+            <p class="sub">Validando tu correo, espera un momento…</p>
+
+            <div id="mensaje" class="mensaje oculto"></div>
+
+            <div id="estado" style="text-align:center; color:#444; font-weight:700;">
+                Procesando confirmación...
+            </div>
+
+            <!-- Loader simple -->
+            <div id="loader" style="display:flex; justify-content:center; margin-top:16px;">
+                <div style="
+                    width:38px;height:38px;border-radius:50%;
+                    border:4px solid #f3f4f6;
+                    border-top:4px solid #d32f2f;
+                    animation: spin 1s linear infinite;">
+                </div>
+            </div>
+
+            <div class="footer-links" style="margin-top:20px;">
+                <a id="linkLogin" href="/index.html" style="display:none;">Ir a iniciar sesión</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // animación del loader
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes spin { to { transform: rotate(360deg); } }`;
+        document.head.appendChild(style);
+    </script>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/confirmar.js"></script>
+</body>
+</html>

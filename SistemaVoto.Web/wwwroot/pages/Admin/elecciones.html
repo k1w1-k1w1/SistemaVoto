@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Elecciones</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/admin-theme.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <h1>🗳️ Gestión de Elecciones</h1>
+                <p class="breadcrumb">Admin / Elecciones</p>
+            </div>
+            <div>
+                <button onclick="window.location.href='/pages/Admin/dashboard.html'" class="btn-admin-secondary">
+                    ← Volver
+                </button>
+            </div>
+        </div>
+
+        <div id="mensaje" class="mensaje oculto"></div>
+
+        <!-- Botón crear -->
+        <div class="admin-card">
+            <button onclick="abrirModalCrear()" class="btn-admin-primary">
+                ➕ Nueva Elección
+            </button>
+        </div>
+
+        <!-- Lista de Elecciones -->
+        <div class="admin-card">
+            <h3>📋 Listado de Elecciones</h3>
+            <div id="listaElecciones">
+                <div class="admin-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Crear/Editar -->
+    <div id="modalEleccion" class="admin-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h3 id="modalTitulo">Nueva Elección</h3>
+                <button class="admin-modal-close" onclick="cerrarModal()">&times;</button>
+            </div>
+
+            <form id="formEleccion">
+                <input type="hidden" id="eleccionId">
+
+                <div class="admin-form-group">
+                    <label for="nombre">Nombre de la Elección *</label>
+                    <input type="text" id="nombre" class="admin-form-control" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" class="admin-form-control" rows="3"></textarea>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="tipo">Tipo de Elección *</label>
+                    <select id="tipo" class="admin-form-control" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Presidencial">Presidencial</option>
+                        <option value="Legislativa">Legislativa</option>
+                        <option value="Municipal">Municipal</option>
+                        <option value="Referendo">Referendo</option>
+                        <option value="Consulta">Consulta</option>
+                    </select>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="fechaInicio">Fecha de Inicio *</label>
+                    <input type="datetime-local" id="fechaInicio" class="admin-form-control" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="fechaFin">Fecha de Fin *</label>
+                    <input type="datetime-local" id="fechaFin" class="admin-form-control" required>
+                </div>
+
+                <div class="admin-actions-grid">
+                    <button type="submit" class="btn-admin-primary">Guardar</button>
+                    <button type="button" onclick="cerrarModal()" class="btn-admin-secondary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/admin-elecciones.js"></script>
+</body>
+</html>

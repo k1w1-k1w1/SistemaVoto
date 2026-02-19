@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Jefe de Junta</title>
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <!-- Si ya usas el tema admin rojo/blanco, puedes reutilizarlo también -->
+    <link rel="stylesheet" href="/css/admin-theme.css" />
+</head>
+
+<body>
+    <div class="page">
+        <div class="shell">
+
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="brand">
+                    <h1>🗳️ Sistema de Votación Electrónica</h1>
+                    <p id="userInfo">Cargando sesión...</p>
+                </div>
+
+                <button id="btnLogout" class="btnx danger">Cerrar sesión</button>
+            </div>
+
+            <!-- PANEL -->
+            <div class="panel">
+
+                <div class="panel-head">
+                    <div class="user-chip">
+                        <span class="user-dot"></span>
+                        <span id="estadoSesion">Validando...</span>
+                    </div>
+
+                    <div style="color:#c62828; font-weight:800;">
+                        Panel Jefe de Junta
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div id="mensaje" class="mensaje oculto"></div>
+
+                    <div class="grid">
+
+                        <!-- IZQUIERDA: Recinto + Stats -->
+                        <div class="card2">
+                            <h3>📍 Mi recinto</h3>
+
+                            <div class="kv" id="recintoBox">
+                                Cargando información del recinto...
+                            </div>
+
+                            <div class="small-note" id="recintoNote">
+                                Si no tienes recinto asignado, un administrador debe asignarte uno.
+                            </div>
+
+                            <hr style="margin:16px 0; border:0; height:1px; background:#eee;" />
+
+                            <h3>📊 Estadísticas rápidas</h3>
+                            <div class="stats-grid" id="statsGrid">
+                                <p>Cargando estadísticas...</p>
+                            </div>
+                        </div>
+
+                        <!-- DERECHA: Acciones + Códigos -->
+                        <div class="card2">
+                            <h3>🎯 Acciones</h3>
+
+                            <div class="actions" style="display:flex; flex-wrap:wrap; gap:10px;">
+                                <button id="btnVerificar" class="btnx primary">✓ Verificar votante</button>
+                                <button id="btnGenerar" class="btnx primary">🔑 Generar código</button>
+                                <button id="btnIncidencia" class="btnx soft">⚠️ Reportar incidencia</button>
+                            </div>
+
+                            <div class="small-note" id="accionesNote">
+                                Primero verifica al votante como presente en el recinto y luego genera su código.
+                            </div>
+
+                            <hr style="margin:16px 0; border:0; height:1px; background:#eee;" />
+
+                            <h3>📋 Códigos generados hoy</h3>
+                            <div id="codigosRecientes">
+                                <div class="admin-spinner"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="footer-actions">
+                    <button id="btnRefrescar" class="btnx soft">🔄 Refrescar</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/jefe-dashboard.js"></script>
+</body>
+</html>

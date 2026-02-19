@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingresar código</title>
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+
+<body>
+    <div class="page">
+        <div class="shell">
+
+            <div class="topbar">
+                <div class="brand">
+                    <h1>🔑 Ingresar código de voto</h1>
+                    <p id="subInfo">Cargando...</p>
+                </div>
+
+                <button id="btnVolver" class="btnx soft">← Volver</button>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <div class="user-chip">
+                        <span class="user-dot"></span>
+                        <span id="estadoSesion">Validando...</span>
+                    </div>
+
+                    <div style="color:#c62828; font-weight:800;">
+                        Verificación de código
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div id="mensaje" class="mensaje oculto"></div>
+
+                    <div class="grid" style="grid-template-columns: 1fr 1fr;">
+
+                        <!-- Formulario -->
+                        <div class="card2">
+                            <h3>Datos</h3>
+
+                            <div class="kv" style="gap:12px;">
+
+                                <div>
+                                    <label style="display:block; margin-bottom:8px; color:#444; font-weight:700;">
+                                        Elección ID (por ahora)
+                                    </label>
+                                    <input id="eleccionId" type="number" min="1" placeholder="Ej: 1"
+                                           style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; font-size:16px;">
+                                    <div style="margin-top:8px; font-size:12.5px; color:#666;">
+                                        Luego lo automatizamos con “elección activa”.
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label style="display:block; margin-bottom:8px; color:#444; font-weight:700;">
+                                        Código de voto
+                                    </label>
+                                    <input id="codigo" type="text" maxlength="50" placeholder="Ej: A1B2C3"
+                                           style="width:100%; padding:12px; border-radius:12px; border:1px solid #ddd; font-size:16px; letter-spacing:2px;">
+                                </div>
+
+                                <button id="btnValidar" class="btnx primary">✅ Verificar código</button>
+                            </div>
+                        </div>
+
+                        <!-- Info de recinto -->
+                        <div class="card2">
+                            <h3>Tu recinto</h3>
+                            <div class="kv" id="recintoInfo">Cargando...</div>
+                            <div class="small-note" style="margin-top:12px;">
+                                Si algo no coincide, contacta al administrador.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="footer-actions">
+                    <button id="btnLogout" class="btnx danger">Cerrar sesión</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/votante-codigo.js"></script>
+</body>
+</html>

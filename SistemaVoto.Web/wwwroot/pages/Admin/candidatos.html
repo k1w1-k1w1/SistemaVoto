@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Candidatos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/admin-theme.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="admin-header">
+            <div>
+                <h1>👤 Gestión de Candidatos</h1>
+                <p class="breadcrumb">Admin / Candidatos</p>
+            </div>
+            <div>
+                <button onclick="window.location.href='/pages/Admin/dashboard.html'" class="btn-admin-secondary">
+                    ← Volver
+                </button>
+            </div>
+        </div>
+
+        <div id="mensaje" class="mensaje oculto"></div>
+
+        <!-- Botón crear -->
+        <div class="admin-card">
+            <button onclick="abrirModalCrear()" class="btn-admin-primary">
+                ➕ Nuevo Candidato
+            </button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="admin-card">
+            <h3>🔍 Filtrar</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <select id="filtroEleccion" class="admin-form-control" onchange="cargarCandidatos()">
+                    <option value="">Todas las elecciones</option>
+                </select>
+                <select id="filtroLista" class="admin-form-control" onchange="cargarCandidatos()">
+                    <option value="">Todas las listas</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Lista de Candidatos -->
+        <div class="admin-card">
+            <h3>📋 Listado de Candidatos</h3>
+            <div id="listaCandidatos">
+                <div class="admin-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Crear/Editar -->
+    <div id="modalCandidato" class="admin-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h3 id="modalTitulo">Nuevo Candidato</h3>
+                <button class="admin-modal-close" onclick="cerrarModal()">&times;</button>
+            </div>
+
+            <form id="formCandidato">
+                <input type="hidden" id="candidatoId">
+
+                <div class="admin-form-group">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" class="admin-form-control" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="apellido">Apellido *</label>
+                    <input type="text" id="apellido" class="admin-form-control" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="cedula">Cédula *</label>
+                    <input type="text" id="cedula" class="admin-form-control" maxlength="10" required>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="eleccionId">Elección *</label>
+                    <select id="eleccionId" class="admin-form-control" required>
+                        <option value="">Seleccione...</option>
+                    </select>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="listaPoliticaId">Lista Política (Opcional)</label>
+                    <select id="listaPoliticaId" class="admin-form-control">
+                        <option value="">Sin lista política</option>
+                    </select>
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="foto">URL de Foto</label>
+                    <input type="url" id="foto" class="admin-form-control">
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="propuestas">Propuestas</label>
+                    <textarea id="propuestas" class="admin-form-control" rows="4"></textarea>
+                </div>
+
+                <div class="admin-actions-grid">
+                    <button type="submit" class="btn-admin-primary">Guardar</button>
+                    <button type="button" onclick="cerrarModal()" class="btn-admin-secondary">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/admin-candidatos.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar Incidencia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-box">
+            <div class="dashboard-header">
+                <h1>⚠️ Reportar Incidencia</h1>
+                <button onclick="window.location.href='/pages/Jefe/dashboard.html'" class="btn-secondary">
+                    ← Volver
+                </button>
+            </div>
+
+            <div id="mensaje" class="mensaje oculto"></div>
+
+            <div class="card">
+                <h3>Detalles de la Incidencia</h3>
+                <form id="reportarForm">
+                    <div class="form-group">
+                        <label for="tipo">Tipo de Incidencia:</label>
+                        <select id="tipo" required>
+                            <option value="">Seleccione...</option>
+                            <option value="VotanteNoEncontrado">Votante No Encontrado</option>
+                            <option value="SuplantacionIdentidad">Suplantación de Identidad</option>
+                            <option value="DocumentoInvalido">Documento Inválido</option>
+                            <option value="VotoDuplicado">Intento de Voto Duplicado</option>
+                            <option value="ProblemaTecnico">Problema Técnico</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula">Cédula del Votante (opcional):</label>
+                        <input type="text" id="cedula" maxlength="10">
+                        <small>Dejar vacío si no aplica</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea id="descripcion" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Reportar Incidencia</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/jefe-reportar.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Papeleta</title>
+
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+
+    <style>
+        /* Extras para la papeleta */
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid #eee;
+            background: #fff;
+            color: #333;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .search {
+            width: 100%;
+            max-width: 360px;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .gridCards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 950px) {
+            .gridCards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .gridCards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .listaCard {
+            border: 1px solid #eee;
+            border-radius: 14px;
+            padding: 14px;
+            background: #fff;
+        }
+
+        .listaHeader {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .listaTitle {
+            margin: 0;
+            color: #c62828;
+            font-weight: 900;
+            font-size: 15px;
+            line-height: 1.2;
+        }
+
+        .siglas {
+            font-size: 12px;
+            font-weight: 800;
+            background: #fff5f5;
+            border: 1px solid #ffcdd2;
+            color: #c62828;
+            border-radius: 999px;
+            padding: 4px 10px;
+            height: fit-content;
+        }
+
+        .candidato {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 10px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            margin-top: 8px;
+            background: #fafafa;
+        }
+
+            .candidato b {
+                color: #111;
+            }
+
+            .candidato small {
+                color: #666;
+            }
+
+        .radio {
+            transform: scale(1.2);
+            accent-color: #c62828;
+        }
+
+        .confirmBox {
+            border-top: 1px solid #eee;
+            padding: 16px 18px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .choice {
+            color: #333;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .muted {
+            color: #777;
+            font-size: 12.5px;
+            font-weight: 600;
+        }
+
+        .dangerNote {
+            background: #fff3f3;
+            border: 1px solid #ffd0d0;
+            padding: 10px 12px;
+            border-radius: 12px;
+            color: #a11616;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .twoCols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 700px) {
+            .twoCols {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="shell">
+
+            <div class="topbar">
+                <div class="brand">
+                    <h1>📋 Papeleta</h1>
+                    <p id="subInfo">Cargando elección...</p>
+                </div>
+
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button id="btnVolver" class="btnx soft">← Volver</button>
+                    <button id="btnLogout" class="btnx danger">Cerrar sesión</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <div class="user-chip">
+                        <span class="user-dot"></span>
+                        <span id="estadoSesion">Validando...</span>
+                    </div>
+
+                    <div class="pill" id="pillEleccion">Elección: —</div>
+                </div>
+
+                <div class="panel-body">
+                    <div id="mensaje" class="mensaje oculto"></div>
+
+                    <div class="toolbar">
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                            <span class="pill" id="pillTipo">Tipo voto: —</span>
+                            <span class="pill" id="pillEstado">Estado: —</span>
+                        </div>
+
+                        <input id="search" class="search" placeholder="Buscar candidato..." />
+                    </div>
+
+                    <div class="twoCols">
+                        <div class="card2">
+                            <h3>Tipo de voto</h3>
+                            <select id="tipoVoto">
+                                <option value="Individual">Individual (elige un candidato)</option>
+                                <option value="Plancha">Plancha (votas por una lista)</option>
+                                <option value="Blanco">Blanco</option>
+                            </select>
+
+                            <div class="small-note" style="margin-top:10px;">
+                                Tip: Si eliges <b>Plancha</b>, se registrará tu voto por toda la lista política.
+                            </div>
+
+                            <div class="dangerNote">
+                                ⚠️ Una vez confirmado el voto, no podrás cambiarlo.
+                            </div>
+                        </div>
+
+                        <div class="card2">
+                            <h3>Tu selección</h3>
+                            <div class="kv">
+                                <div class="choice" id="seleccionText">Sin selección</div>
+                                <div class="muted" id="seleccionMeta">Elige un candidato o lista, o vota en blanco.</div>
+                            </div>
+
+                            <div class="actions" style="margin-top:14px;">
+                                <button id="btnConfirmar" class="btnx primary" disabled>✅ Confirmar voto</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card2" style="margin-top:14px;">
+                        <h3>Candidatos por lista</h3>
+                        <div id="contenedorListas" class="gridCards"></div>
+                    </div>
+                </div>
+
+                <div class="confirmBox">
+                    <div>
+                        <div class="choice" id="footerChoice">Sin selección</div>
+                        <div class="muted" id="footerHint">Selecciona y confirma tu voto.</div>
+                    </div>
+
+                    <button id="btnConfirmar2" class="btnx primary" disabled>✅ Confirmar voto</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/votante-papeleta.js"></script>
+</body>
+</html>
