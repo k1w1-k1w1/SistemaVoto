@@ -1,7 +1,7 @@
 ﻿// Configuración global de la API
-const API_URL = 'http://localhost:5090/api';
+const API_URL = 'https://sistemavoto.onrender.com/api';
 
-// Helper para hacer peticiones a la API (✅ a prueba de 204 / body vacío)
+// Helper para hacer peticiones a la API (a prueba de 204 / body vacío)
 async function fetchAPI(endpoint, options = {}) {
     const token = localStorage.getItem('token');
 
@@ -26,10 +26,10 @@ async function fetchAPI(endpoint, options = {}) {
 
     if (response.status === 204) return null;
 
-    // ✅ lee el body como texto primero
+    //  lee el body como texto primero
     const text = await response.text();
 
-    // ✅ intenta convertir a JSON solo si hay contenido
+    //  intenta convertir a JSON solo si hay contenido
     let data = null;
     if (text) {
         try {
@@ -53,7 +53,7 @@ async function fetchAPI(endpoint, options = {}) {
         throw err;
     }
 
-    // ✅ si fue 204 o no vino body, devuelve null
+    //  si fue 204 o no vino body, devuelve null
     return data;
 }
 

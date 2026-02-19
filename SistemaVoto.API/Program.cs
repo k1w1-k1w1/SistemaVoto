@@ -28,10 +28,9 @@ namespace SistemaVoto.API
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowWeb", policy =>
-                    policy.WithOrigins("http://localhost:5268", "https://localhost:7023")
+                    policy.AllowAnyOrigin()
                           .AllowAnyHeader()
                           .AllowAnyMethod()
-                          .AllowCredentials()
                 );
             });
 
