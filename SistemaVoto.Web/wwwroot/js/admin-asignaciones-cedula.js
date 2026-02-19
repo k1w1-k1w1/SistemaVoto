@@ -1,10 +1,27 @@
 ﻿// ✅ Seguridad
 if (!verificarAutenticacion() || !verificarRol(['Administrador'])) {
-    // auth.js debe redirigir si no cumple
+    // auth.js redirige si no cumple
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarUbicaciones();
+
+    // Submits
+    const formVotante = document.getElementById('formAsignarVotante');
+    if (formVotante) {
+        formVotante.addEventListener('submit', (e) => {
+            e.preventDefault();
+            asignarVotante();
+        });
+    }
+
+    const formJefe = document.getElementById('formAsignarJefe');
+    if (formJefe) {
+        formJefe.addEventListener('submit', (e) => {
+            e.preventDefault();
+            asignarJefe();
+        });
+    }
 });
 
 // =========================
@@ -29,8 +46,10 @@ function mostrarAlert(mensaje, tipo = 'success') {
 }
 
 function getUbicacionIdSeleccionada() {
-    const sel = document.getElementById('ubicacionSelect');
-    const id = parseInt(sel.value);
+    // ✅ En tu HTML el select se llama ubicacionId
+    const sel = document.getElementById('ubicacionId');
+    if (!sel) return null;
+    const id = parseInt(sel.value, 10);
     return Number.isFinite(id) ? id : null;
 }
 
@@ -42,12 +61,15 @@ function normalizarCedula(value) {
 // Cargar ubicaciones (select)
 // =========================
 async function cargarUbicaciones() {
-    const select = document.getElementById('ubicacionSelect');
-    const info = document.getElementById('ubicacionInfo');
+    const select = document.getElementById('ubicacionId'); // ✅ ID correcto
+    if (!select) {
+        console.error("No existe <select id='ubicacionId'> en el HTML.");
+        mostrarAlert("Falta el selector de ubicaciones (ubicacionId).", "error");
+        return;
+    }
 
     try {
         select.innerHTML = `<option value="">Cargando...</option>`;
-        if (info) info.textContent = '';
 
         const data = await fetchAPI('/AdminAsignaciones/ubicaciones');
 
@@ -59,29 +81,18 @@ async function cargarUbicaciones() {
         // Solo activas primero, luego inactivas
         const ordenadas = [...data].sort((a, b) => (b.activo === true) - (a.activo === true));
 
-        select.innerHTML = `<option value="">Seleccione una ubicación...</option>` + ordenadas.map(u => {
-            const estado = u.activo ? '✅' : '❌';
-            const mesa = u.numeroMesa ? ` - Mesa ${u.numeroMesa}` : '';
-            return `<option value="${u.ubicacionId}">${estado} ${u.nombre}${mesa}</option>`;
-        }).join('');
-
-        select.onchange = () => {
-            const id = getUbicacionIdSeleccionada();
-            const u = ordenadas.find(x => x.ubicacionId === id);
-            if (!u) {
-                if (info) info.textContent = '';
-                return;
-            }
-            if (info) {
-                info.textContent = `${u.direccion} | Capacidad: ${u.capacidadVotantes} | Estado: ${u.activo ? 'Activa' : 'Inactiva'}`;
-            }
-        };
+        select.innerHTML =
+            `<option value="">Seleccione una ubicación...</option>` +
+            ordenadas.map(u => {
+                const estado = u.activo ? '✅' : '❌';
+                const mesa = u.numeroMesa ? ` - Mesa ${u.numeroMesa}` : '';
+                return `<option value="${u.ubicacionId}">${estado} ${u.nombre}${mesa}</option>`;
+            }).join('');
 
         // Seleccionar la primera activa automáticamente
         const primeraActiva = ordenadas.find(u => u.activo);
         if (primeraActiva) {
             select.value = String(primeraActiva.ubicacionId);
-            select.onchange();
         }
 
     } catch (err) {
@@ -95,7 +106,7 @@ async function cargarUbicaciones() {
 // Acciones VOTANTE
 // =========================
 async function asignarVotante() {
-    const cedula = normalizarCedula(document.getElementById('cedulaVotante').value);
+    const cedula = normalizarCedula(document.getElementById('cedulaVotante')?.value);
     const ubicacionId = getUbicacionIdSeleccionada();
 
     if (!cedula) return mostrarAlert('Ingresa la cédula del votante.', 'warning');
@@ -115,7 +126,7 @@ async function asignarVotante() {
 }
 
 async function quitarVotante() {
-    const cedula = normalizarCedula(document.getElementById('cedulaVotante').value);
+    const cedula = normalizarCedula(document.getElementById('cedulaVotante')?.value);
     if (!cedula) return mostrarAlert('Ingresa la cédula del votante.', 'warning');
 
     try {
@@ -135,7 +146,7 @@ async function quitarVotante() {
 // Acciones JEFE
 // =========================
 async function asignarJefe() {
-    const cedula = normalizarCedula(document.getElementById('cedulaJefe').value);
+    const cedula = normalizarCedula(document.getElementById('cedulaJefe')?.value);
     const ubicacionId = getUbicacionIdSeleccionada();
 
     if (!cedula) return mostrarAlert('Ingresa la cédula del jefe.', 'warning');
@@ -155,7 +166,7 @@ async function asignarJefe() {
 }
 
 async function quitarJefe() {
-    const cedula = normalizarCedula(document.getElementById('cedulaJefe').value);
+    const cedula = normalizarCedula(document.getElementById('cedulaJefe')?.value);
     if (!cedula) return mostrarAlert('Ingresa la cédula del jefe.', 'warning');
 
     try {
