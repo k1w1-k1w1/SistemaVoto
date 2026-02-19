@@ -23,13 +23,13 @@
         setTimeout(() => {
             switch (data.usuario.rol) {
                 case 'Votante':
-                    window.location.href = '/pages/votante/dashboard.html';
+                    window.location.href = '/pages/Votante/dashboard.html';
                     break;
                 case 'JefeDeJunta':
                     window.location.href = '/pages/jefe/dashboard.html';
                     break;
                 case 'Administrador':
-                    window.location.href = '/pages/admin/dashboard.html';
+                    window.location.href = '/pages/Admin/dashboard.html';
                     break;
                 default:
                     mostrarMensaje('mensaje', 'Rol no reconocido', 'error');
